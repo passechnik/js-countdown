@@ -1,7 +1,22 @@
 body {
     background-color: bisque;
     color: black;
-    font-size: 3rem;
     display: flex;
     justify-content: center;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+#countdown {
+    font-size: 10rem;
+    font-family: sans-serif;
 }
