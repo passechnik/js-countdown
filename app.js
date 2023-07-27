@@ -68,3 +68,15 @@ document.getElementById("start-countdown").addEventListener("click", function ()
         alert("Please select a valid trip date.");
     }
 });
+
+// make a change date button
+
+let interval
+
+function stopCountdown() {
+    clearInreval(interval);
+}
+
+function startCountdown(endTime) {
+    interval = setInterval(updateCountdown, 1000,  endTime)
+}
