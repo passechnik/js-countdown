@@ -39,13 +39,25 @@ function getTimeRemaining(endTime) {
 }
 
 // function to update the countdown display
+
+let interval
+
+function stopCountdown() {
+    clearInterval(interval);
+}
+
+function startCountdown(endTime) {
+    interval = setInterval(updateCountdown, 1000,  endTime)
+    updateCountdown(endTime)
+}
+
 function updateTripCountdown(endTime) {
     const countdownElement = document.getElementById("trip-countdown");
 
     function update() {
         const timeRemaining = getTimeRemaining(endTime);
         if (timeRemaining.total <= 0) {
-            clearInterval(interval);
+            stopCountdown();
             countdownElement.textContent = "Trip Time!";
         } else {
             countdownElement.textContent = `Trip in ${timeRemaining.days} days, ${timeRemaining.hours} hours, ${timeRemaining.minutes} minutes, ${timeRemaining.seconds} seconds`;
@@ -55,7 +67,7 @@ function updateTripCountdown(endTime) {
     update(); // call once to display initial countdown
 
     // update countdown every second
-    const interval = setInterval(update, 1000);
+    interval = setInterval(update, 1000);
 }
 
 // event listener for the "Start Countdown" button
@@ -71,12 +83,14 @@ document.getElementById("start-countdown").addEventListener("click", function ()
 
 // make a change date button
 
-let interval
-
-function stopCountdown() {
-    clearInreval(interval);
-}
-
-function startCountdown(endTime) {
-    interval = setInterval(updateCountdown, 1000,  endTime)
-}
+// event listener for the 'change trip date' button 
+document.getElementById('change-date').addEventListener('click', function () {
+    const tripDateInput = document.getElementById('trip-date');
+    const tripDate = tripDateInput.value;
+    if (tripDate) {
+        stopCountdown(); // stop the previous countdown before starting a new one
+        updateTripCountdown(tripDate);
+    } else {
+        alert('Please select a valid trip date.')
+    }
+})
