@@ -41,6 +41,7 @@ function getTimeRemaining(endTime) {
 // function to update the countdown display
 
 let interval
+let isFirstTime = true
 
 function stopCountdown() {
     clearInterval(interval);
@@ -68,6 +69,13 @@ function updateTripCountdown(endTime) {
 
     // update countdown every second
     interval = setInterval(update, 1000);
+
+    //hide the 'start countdown' button to avoid displaying two different countdowns simultaneously
+    if (isFirstTime) {
+    isFirstTime = false
+    const startCountdownButton = document.getElementById('start-countdown')
+    startCountdownButton.style.display = 'none'
+    }
 }
 
 // event listener for the "Start Countdown" button
